@@ -16,7 +16,7 @@
                 <form class="needs-validation ">
                     <div class="row gx-3">
                         <div class="form-floating mb-3 col">
-                            <input id="txtFirstName"  class="form-control"  placeholder="First Name" required>
+                            <input id="txtFirstName"  class="form-control"  placeholder="First Name" aria-label="First Name" required>
                             <label for="txtFirstName" class="form-label text-black ms-1">First Name</label>
                             <div class="invalid-feedback">
                                 Please enter your First Name.
@@ -24,7 +24,7 @@
                         </div>
                         
                         <div class="form-floating mb-3 col">
-                            <input id="txtLastName" type="text" class="form-control" placeholder="Last Name" required>
+                            <input id="txtLastName" type="text" class="form-control" placeholder="Last Name" aria-label="Last Name" required>
                             <label for="txtLastName" class="form-label text-black ms-1">Last Name</label>
                             <div class="invalid-feedback">
                                 Please enter your Last Name.
@@ -34,7 +34,7 @@
                     
                     <div class="row">
                         <div class="form-floating mb-3">
-                            <input id="txtStreet1" type="text" class="form-control" placeholder="Street Address 1" required>
+                            <input id="txtStreet1" type="text" class="form-control" placeholder="Street Address 1" aria-label="Street 1" required>
                             <label for="txtStreet1" class="form-label text-black ms-2">Street Address 1</label>
                             <div class="invalid-feedback">
                                 Please enter an Address.
@@ -44,14 +44,14 @@
 
                     <div class="row">
                         <div class="form-floating mb-3">
-                            <input id="txtStreet2" type="text" class="form-control" placeholder="Street Address 2">
+                            <input id="txtStreet2" type="text" class="form-control" placeholder="Street Address 2" aria-label="Street 2" >
                             <label for="txtStreet2" class="form-label text-black ms-2">Street Address 2</label>
                         </div>
                     </div>
 
                     <div class="row gx-3">
                         <div class="form-floating mb-3 col-5">
-                            <input id="txtCity" type="text" class="form-control" placeholder="City" required>
+                            <input id="txtCity" type="text" class="form-control" placeholder="City" aria-label="City" required>
                             <label for="txtCity" class="form-label text-black ms-1">City</label>
                             <div class="invalid-feedback">
                                 Please enter a City.
@@ -59,7 +59,7 @@
                         </div>
             
                         <div class="form-floating mb-3 col-3">
-                            <input id="txtState" type="text" class="form-control" maxlength="2" placeholder="State" required>
+                            <input id="txtState" type="text" class="form-control" maxlength="2" placeholder="State" aria-label="State" required>
                             <label for="txtState" class="form-label text-black ms-1">State</label>
                             <div class="invalid-feedback">
                                 Please enter a State.
@@ -67,8 +67,8 @@
                         </div>
     
                         <div class="form-floating mb-3 col-4">
-                            <input id="intZipCode" type="number" class="form-control" placeholder="Zip Code" required>
-                            <label for="intZipCode" class="form-label text-black ms-1">Zip Code</label>
+                            <input id="intZipCode" type="number" class="form-control" placeholder="Zip Code" aria-label="Zip Code" required>
+                            <label for="intZipCode" class="form-label text-black ms-1">ZIP</label>
                             <div class="invalid-feedback">
                                 Please enter a Zip Code.
                             </div>
@@ -77,7 +77,7 @@
 
                     <div class="row">
                         <div class="form-floating mb-3">
-                            <input id="intPhone" type="tel" class="form-control" placeholder="Phone Number" required>
+                            <input id="intPhone" type="tel" class="form-control" placeholder="Phone Number" aria-label="Phone Number" required>
                             <label for="intPhone" class="form-label text-black ms-2">Phone Number</label>
                             <div class="invalid-feedback">
                                 Please enter a Phone Number.
@@ -88,7 +88,7 @@
 
                     <div class="row">
                         <div class="form-floating mb-3">
-                            <input id="txtEmail" type="text" class="form-control" placeholder="Email/Username" required>
+                            <input id="txtEmail" type="text" class="form-control" placeholder="Email/Username" aria-label="Email/Username" required>
                             <label for="txtEmail" class="form-label text-black ms-2">Email/Username</label>
                             <div class="invalid-feedback">
                                 Please enter an Email or Username.
@@ -98,7 +98,7 @@
 
                     <div class="row">
                         <div class="form-floating mb-3">
-                            <input id="txtPassword" type="password" class="form-control" placeholder="Password" required>
+                            <input id="txtPassword" type="password" class="form-control" placeholder="Password" aria-label="Password" required>
                             <label for="txtPassword" class="form-label text-black ms-2">Password</label>
                             <div class="invalid-feedback">
                                 Please enter a Password.
