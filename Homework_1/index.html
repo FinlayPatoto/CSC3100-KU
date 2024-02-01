@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Registration Form</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link href="/css/lib/darkly.bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="col-xs-12 col-md-10 col-lg-6 offset-md-1 offset-lg-3 card mt-5 bg-light">
+            <div class="card-body">
+                <h1 class="text-primary">
+                    Registration Form
+                </h1>
+                <form class="needs-validation ">
+                    <div class="row gx-3">
+                        <div class="form-floating mb-3 col">
+                            <input id="txtFirstName"  class="form-control"  placeholder="First Name" required>
+                            <label for="txtFirstName" class="form-label text-black ms-1">First Name</label>
+                            <div class="invalid-feedback">
+                                Please enter your First Name.
+                            </div>
+                        </div>
+                        
+                        <div class="form-floating mb-3 col">
+                            <input id="txtLastName" type="text" class="form-control" placeholder="Last Name" required>
+                            <label for="txtLastName" class="form-label text-black ms-1">Last Name</label>
+                            <div class="invalid-feedback">
+                                Please enter your Last Name.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="form-floating mb-3">
+                            <input id="txtStreet1" type="text" class="form-control" placeholder="Street Address 1" required>
+                            <label for="txtStreet1" class="form-label text-black ms-2">Street Address 1</label>
+                            <div class="invalid-feedback">
+                                Please enter an Address.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-floating mb-3">
+                            <input id="txtStreet2" type="text" class="form-control" placeholder="Street Address 2">
+                            <label for="txtStreet2" class="form-label text-black ms-2">Street Address 2</label>
+                        </div>
+                    </div>
+
+                    <div class="row gx-3">
+                        <div class="form-floating mb-3 col-5">
+                            <input id="txtCity" type="text" class="form-control" placeholder="City" required>
+                            <label for="txtCity" class="form-label text-black ms-1">City</label>
+                            <div class="invalid-feedback">
+                                Please enter a City.
+                            </div>
+                        </div>
+            
+                        <div class="form-floating mb-3 col-3">
+                            <input id="txtState" type="text" class="form-control" maxlength="2" placeholder="State" required>
+                            <label for="txtState" class="form-label text-black ms-1">State</label>
+                            <div class="invalid-feedback">
+                                Please enter a State.
+                            </div>
+                        </div>
+    
+                        <div class="form-floating mb-3 col-4">
+                            <input id="intZipCode" type="number" class="form-control" placeholder="Zip Code" required>
+                            <label for="intZipCode" class="form-label text-black ms-1">Zip Code</label>
+                            <div class="invalid-feedback">
+                                Please enter a Zip Code.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-floating mb-3">
+                            <input id="intPhone" type="tel" class="form-control" placeholder="Phone Number" required>
+                            <label for="intPhone" class="form-label text-black ms-2">Phone Number</label>
+                            <div class="invalid-feedback">
+                                Please enter a Phone Number.
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="row">
+                        <div class="form-floating mb-3">
+                            <input id="txtEmail" type="text" class="form-control" placeholder="Email/Username" required>
+                            <label for="txtEmail" class="form-label text-black ms-2">Email/Username</label>
+                            <div class="invalid-feedback">
+                                Please enter an Email or Username.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-floating mb-3">
+                            <input id="txtPassword" type="password" class="form-control" placeholder="Password" required>
+                            <label for="txtPassword" class="form-label text-black ms-2">Password</label>
+                            <div class="invalid-feedback">
+                                Please enter a Password.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button id="btnSubmit" type="button" class="btn btn-primary col-12 mt-2">Submit</button>
+                    <button id="btnReset" type="button" class="btn btn-secondary col-12 mt-2">Reset</button>
+                </form>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            $('#btnSubmit').on('click', function(){
+                let strFirstName = $('#txtFirstName').val();
+                let strLastName = $('#txtLastName').val();
+                let strStreet1 = $('#txtStreet1').val();
+                let strStreet2 = $('#txtStreet2').val();
+                let strCity = $('#txtCity').val();
+                let strState = $('#txtState').val();
+                let intZipCode = $('#intZipCode').val();
+                let intPhone = $('#intPhone').val();
+                let strEmail = $('#txtEmail').val();
+                let strPassword = $('#txtPassword').val();
+
+                let blnError = false;
+                let strErrorMessage = 'The following fields are blank: ';
+                
+                if(strFirstName.length < 1) {
+                    blnError = true;
+                    strErrorMessage += 'First Name, ';
+                }
+                if(strLastName.length < 1) {
+                    blnError = true;
+                    strErrorMessage += 'Last Name, ';
+                }
+                if(strStreet1.length < 1) {
+                    blnError = true;
+                    strErrorMessage += 'Street Address, ';
+                }
+                if(strCity.length < 1) {
+                    blnError = true;
+                    strErrorMessage += 'City, ';
+                }
+                if(strState.length < 1) {
+                    blnError = true;
+                    strErrorMessage += 'State, ';
+                }
+                if(intZipCode.length < 1) {
+                    blnError = true;
+                    strErrorMessage += 'Zip Code, ';
+                }
+                if(intPhone.length < 1) {
+                    blnError = true;
+                    strErrorMessage += 'Phone Number, ';
+                }
+                if(strEmail.length < 1) {
+                    blnError = true;
+                    strErrorMessage += 'Email/Username, ';
+                }
+                if(strPassword.length < 1) {
+                    blnError = true;
+                    strErrorMessage += 'Password, ';
+                }
+
+                if(blnError == true){
+                    strErrorMessage = strErrorMessage.substring(0, strErrorMessage.length-2);
+                    console.log(strErrorMessage);
+                    $('.needs-validation').addClass('was-validated')
+                    Swal.fire({
+                        title: "Oops!",
+                        text: strErrorMessage,
+                        icon: "error"
+                    });
+                }else{
+                    console.log('No errors found');
+                }
+            });
+
+            $('#btnReset').on('click', function(){
+                $('#txtFirstName').val('');
+                $('#txtLastName').val('');
+                $('#txtStreet1').val('');
+                $('#txtStreet2').val('');
+                $('#txtCity').val('');
+                $('#txtState').val('');
+                $('#intZipCode').val('');
+                $('#intPhone').val('');
+                $('#txtEmail').val('');
+                $('#txtPassword').val('');
+                $('.needs-validation').removeClass('was-validated');
+            });
+        </script>
+    </body>
+</html>
