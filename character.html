@@ -14,7 +14,14 @@
                     <h3 class="text-center">Character Database Search</h3>
                 </div>
                 <div class="card-body">
-                    <form class="">
+                    <form>
+                        <h2>Please Select a Character to View</h2>
+                        <div id="divTest">
+                            <h2>This is a test</h2>
+                            <p id="prTest">This is also a test</p>
+                            <h2>This is a final test</h2>
+                        </div>
+
                         <button class="btn btn-primary" id="btnSearch" type="button">Find Asset</button>
                         <hr/>
                         <label for="selCharacters" class="form-label">Characters</label>
@@ -50,7 +57,8 @@
             $(document).on('click', '#btnReset', function(){
                 let strSearched = $(this).attr('data-searched');
                 console.log(strSearched);
-                $(`#div${strSearched}`).remove();
+                $(this).parent().parent().remove();
+                //$(`#div${strSearched}`).remove();
                 //$('#divDetails').empty();
             });
 
