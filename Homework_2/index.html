@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Homework 2</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    </head>
+    <body class="bg-dark">
+        <div id="divCustInfo" class="card">
+            <div class="card-header">
+                <h2>Order Form</h2>
+            </div>
+            <div class="card-body">
+                <form class="needs-validation">
+                    <h3>Contact Information</h3>
+                    <div id="divContactInfo">
+                        <div class="row gx-3">
+                            <div class="form-floating mb-3 col">
+                                <input id="txtFirstName"  class="form-control"  placeholder="First Name" aria-label="First Name" required>
+                                <label for="txtFirstName" class="form-label text-black ms-1">First Name</label>
+                                <div class="invalid-feedback">
+                                    Please enter your First Name.
+                                </div>
+                            </div>
+                            
+                            <div class="form-floating mb-3 col">
+                                <input id="txtLastName" type="text" class="form-control" placeholder="Last Name" aria-label="Last Name" required>
+                                <label for="txtLastName" class="form-label text-black ms-1">Last Name</label>
+                                <div class="invalid-feedback">
+                                    Please enter your Last Name.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-floating mb-3">
+                                <input id="intPhone" type="tel" class="form-control" placeholder="Phone Number" aria-label="Phone Number" required>
+                                <label for="intPhone" class="form-label text-black ms-2">Phone Number</label>
+                                <div class="invalid-feedback">
+                                    Please enter a Phone Number.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-floating mb-3">
+                                <input id="txtEmail" type="emial" class="form-control" placeholder="Email Address" aria-label="Email Address" required>
+                                <label for="txtEmail" class="form-label text-black ms-2">Email Address</label>
+                                <div class="invalid-feedback">
+                                    Please enter an Email Address.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3>Shipping Address</h3>
+                    <div id="divShipping">
+                        <div class="row">
+                            <div class="form-floating mb-3">
+                                <input id="txtStreet1Ship" type="text" class="form-control" placeholder="Street Address 1" aria-label="Street 1 Shipping" required>
+                                <label for="txtStreet1Ship" class="form-label text-black ms-2">Street Address 1</label>
+                                <div class="invalid-feedback">
+                                    Please enter a Shipping Address.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-floating mb-3">
+                                <input id="txtStreet2Ship" type="text" class="form-control" placeholder="Street Address 2" aria-label="Street 2 Shipping" >
+                                <label for="txtStreet2Ship" class="form-label text-black ms-2">Street Address 2</label>
+                            </div>
+                        </div>
+
+                        <div class="row gx-3">
+                            <div class="form-floating mb-3 col-5">
+                                <input id="txtCityShip" type="text" class="form-control" placeholder="City" aria-label="City Shipping" required>
+                                <label for="txtCityShip" class="form-label text-black ms-1">City</label>
+                                <div class="invalid-feedback">
+                                    Please enter a City.
+                                </div>
+                            </div>
+                
+                            <div class="form-floating mb-3 col-3">
+                                <input id="txtStateShip" type="text" class="form-control" maxlength="2" placeholder="State" aria-label="State Shipping" required>
+                                <label for="txtStateShip" class="form-label text-black ms-1">State</label>
+                                <div class="invalid-feedback">
+                                    Please enter a State.
+                                </div>
+                            </div>
+        
+                            <div class="form-floating mb-3 col-4">
+                                <input id="intZipCodeShip" type="number" class="form-control" placeholder="Zip Code" aria-label="Zip Code Shipping" required>
+                                <label for="intZipCodeShip" class="form-label text-black ms-1">ZIP</label>
+                                <div class="invalid-feedback">
+                                    Please enter a Zip Code.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3>Billing Address</h3>
+                    <input id="chkShipping" class="form-control" type="checkbox">
+                    <label for="chkShipping" class="form-label">Same as Shipping Address</label>
+
+                    <div id="divBilling">
+                        <div class="row">
+                            <div class="form-floating mb-3">
+                                <input id="txtStreet1Bill" type="text" class="form-control" placeholder="Street Address 1" aria-label="Street 1 Billing">
+                                <label for="txtStreet1Bill" class="form-label text-black ms-2">Street Address 1</label>
+                                <div class="invalid-feedback">
+                                    Please enter a Billing Address.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-floating mb-3">
+                                <input id="txtStreet2Bill" type="text" class="form-control" placeholder="Street Address 2" aria-label="Street 2 Billing" >
+                                <label for="txtStreet2Bill" class="form-label text-black ms-2">Street Address 2</label>
+                            </div>
+                        </div>
+
+                        <div class="row gx-3">
+                            <div class="form-floating mb-3 col-5">
+                                <input id="txtCityBill" type="text" class="form-control" placeholder="City" aria-label="City Billing">
+                                <label for="txtCityBill" class="form-label text-black ms-1">City</label>
+                                <div class="invalid-feedback">
+                                    Please enter a City.
+                                </div>
+                            </div>
+                
+                            <div class="form-floating mb-3 col-3">
+                                <input id="txtStateBill" type="text" class="form-control" maxlength="2" placeholder="State" aria-label="State Billing">
+                                <label for="txtStateBill" class="form-label text-black ms-1">State</label>
+                                <div class="invalid-feedback">
+                                    Please enter a State.
+                                </div>
+                            </div>
+        
+                            <div class="form-floating mb-3 col-4">
+                                <input id="intZipCodeBill" type="number" class="form-control" placeholder="Zip Code" aria-label="Zip Code Billing">
+                                <label for="intZipCodeBill" class="form-label text-black ms-1">ZIP</label>
+                                <div class="invalid-feedback">
+                                    Please enter a Zip Code.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    </body>
+</html>
