@@ -7,178 +7,185 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     </head>
     <body class="bg-dark">
-        <div id="divCustInfo" class="card col-s-12 col-8 offset-2">
-            <div class="card-header">
-                <h2>Order Form</h2>
-            </div>
-            <div class="card-body">
-                <form class="needs-validation">
-                    <h3>Contact Information</h3>
-                    <div id="divContactInfo">
-                        <div class="row gx-3">
-                            <div class="form-floating mb-3 col">
-                                <input id="txtFirstName"  class="form-control"  placeholder="First Name" aria-label="First Name" required>
-                                <label for="txtFirstName" class="form-label text-black ms-1">First Name</label>
-                                <div class="invalid-feedback">
-                                    Please enter your First Name.
+        <div id="divMain" class="col-12 d-flex justify-content-center align-items-center text-black">
+            <div id="divOrderInfo" class="card col-12 col-md-8 col-lg-6">
+                <div class="card-header">
+                    <h2>Order Form</h2>
+                </div>
+                <div class="card-body">
+                    <form class="needs-validation">
+                        <h3>Contact Information</h3>
+                        <div id="divContactInfo">
+                            <div class="row gx-3">
+                                <div class="form-floating mb-3 col"> <!--Used some bootstrap styling to make floating form labels as well as some dynamic validation-->
+                                    <input id="txtFirstName"  class="form-control"  placeholder="First Name" aria-label="First Name" required>
+                                    <label for="txtFirstName" class="form-label text-black ms-1">First Name</label>
+                                    <div class="invalid-feedback">
+                                        Please enter your First Name.
+                                    </div>
+                                </div>
+                                
+                                <div class="form-floating mb-3 col">
+                                    <input id="txtLastName" type="text" class="form-control" placeholder="Last Name" aria-label="Last Name" required>
+                                    <label for="txtLastName" class="form-label text-black ms-1">Last Name</label>
+                                    <div class="invalid-feedback">
+                                        Please enter your Last Name.
+                                    </div>
                                 </div>
                             </div>
-                            
-                            <div class="form-floating mb-3 col">
-                                <input id="txtLastName" type="text" class="form-control" placeholder="Last Name" aria-label="Last Name" required>
-                                <label for="txtLastName" class="form-label text-black ms-1">Last Name</label>
-                                <div class="invalid-feedback">
-                                    Please enter your Last Name.
+    
+                            <div class="row">
+                                <div class="form-floating mb-3">
+                                    <input id="intPhone" type="tel" class="form-control" placeholder="Phone Number" aria-label="Phone Number" required>
+                                    <label for="intPhone" class="form-label text-black ms-2">Phone Number</label>
+                                    <div class="invalid-feedback">
+                                        Please enter a Phone Number.
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <div class="form-floating mb-3">
+                                    <input id="txtEmail" type="email" class="form-control" placeholder="Email Address" aria-label="Email Address" required>
+                                    <label for="txtEmail" class="form-label text-black ms-2">Email Address</label>
+                                    <div class="invalid-feedback">
+                                        Please enter an Email Address.
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="row">
-                            <div class="form-floating mb-3">
-                                <input id="intPhone" type="tel" class="form-control" placeholder="Phone Number" aria-label="Phone Number" required>
-                                <label for="intPhone" class="form-label text-black ms-2">Phone Number</label>
-                                <div class="invalid-feedback">
-                                    Please enter a Phone Number.
+    
+                        <h3>Shipping Address</h3>
+                        <div id="divShipping">
+                            <div class="row">
+                                <div class="form-floating mb-3">
+                                    <input id="txtStreet1Ship" type="text" class="form-control" placeholder="Street Address 1" aria-label="Street 1 Shipping" required>
+                                    <label for="txtStreet1Ship" class="form-label text-black ms-2">Street Address 1</label>
+                                    <div class="invalid-feedback">
+                                        Please enter a Shipping Address.
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <div class="form-floating mb-3">
+                                    <input id="txtStreet2Ship" type="text" class="form-control" placeholder="Street Address 2" aria-label="Street 2 Shipping" >
+                                    <label for="txtStreet2Ship" class="form-label text-black ms-2">Street Address 2</label>
+                                </div>
+                            </div>
+    
+                            <div class="row gx-3">
+                                <div class="form-floating mb-3 col-5">
+                                    <input id="txtCityShip" type="text" class="form-control" placeholder="City" aria-label="City Shipping" required>
+                                    <label for="txtCityShip" class="form-label text-black ms-1">City</label>
+                                    <div class="invalid-feedback">
+                                        Please enter a City.
+                                    </div>
+                                </div>
+                    
+                                <div class="form-floating mb-3 col-3">
+                                    <input id="txtStateShip" type="text" class="form-control" maxlength="2" placeholder="State" aria-label="State Shipping" required>
+                                    <label for="txtStateShip" class="form-label text-black ms-1">State</label>
+                                    <div class="invalid-feedback">
+                                        Please enter a State.
+                                    </div>
+                                </div>
+            
+                                <div class="form-floating mb-3 col-4">
+                                    <input id="intZipCodeShip" type="number" class="form-control" placeholder="Zip Code" aria-label="Zip Code Shipping" required>
+                                    <label for="intZipCodeShip" class="form-label text-black ms-1">ZIP</label>
+                                    <div class="invalid-feedback">
+                                        Please enter a Zip Code.
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="row">
-                            <div class="form-floating mb-3">
-                                <input id="txtEmail" type="emial" class="form-control" placeholder="Email Address" aria-label="Email Address" required>
-                                <label for="txtEmail" class="form-label text-black ms-2">Email Address</label>
-                                <div class="invalid-feedback">
-                                    Please enter an Email Address.
+    
+                        <h3>Billing Address</h3>
+                        <input id="chkShipping" class="form-check-input" type="checkbox" aria-label="Same as Shipping"> <!--Made checkbox to reduce input if Shipping and Billing is same-->
+                        <label for="chkShipping" class="form-label">Same as Shipping Address</label>
+    
+                        <div id="divBilling">
+                            <div class="row">
+                                <div class="form-floating mb-3">
+                                    <input id="txtStreet1Bill" type="text" class="form-control" placeholder="Street Address 1" aria-label="Street 1 Billing" required>
+                                    <label for="txtStreet1Bill" class="form-label text-black ms-2">Street Address 1</label>
+                                    <div class="invalid-feedback">
+                                        Please enter a Billing Address.
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <div class="form-floating mb-3">
+                                    <input id="txtStreet2Bill" type="text" class="form-control" placeholder="Street Address 2" aria-label="Street 2 Billing">
+                                    <label for="txtStreet2Bill" class="form-label text-black ms-2">Street Address 2</label>
+                                </div>
+                            </div>
+    
+                            <div class="row gx-3">
+                                <div class="form-floating mb-3 col-5">
+                                    <input id="txtCityBill" type="text" class="form-control" placeholder="City" aria-label="City Billing" required>
+                                    <label for="txtCityBill" class="form-label text-black ms-1">City</label>
+                                    <div class="invalid-feedback">
+                                        Please enter a City.
+                                    </div>
+                                </div>
+                    
+                                <div class="form-floating mb-3 col-3">
+                                    <input id="txtStateBill" type="text" class="form-control" maxlength="2" placeholder="State" aria-label="State Billing" required>
+                                    <label for="txtStateBill" class="form-label text-black ms-1">State</label>
+                                    <div class="invalid-feedback">
+                                        Please enter a State.
+                                    </div>
+                                </div>
+            
+                                <div class="form-floating mb-3 col-4">
+                                    <input id="intZipCodeBill" type="number" class="form-control" placeholder="Zip Code" aria-label="Zip Code Billing" required>
+                                    <label for="intZipCodeBill" class="form-label text-black ms-1">ZIP</label>
+                                    <div class="invalid-feedback">
+                                        Please enter a Zip Code.
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        
+                        <h3>Products</h3>
+                        <select id="selTop" class="form-select" required> <!--select boxes for clothing choices-->
+                            <option value="">Select Top</option>
+                        </select>
+    
+                        <select id="selBottom" class="form-select my-2" required>
+                            <option value="">Select Bottom</option>
+                        </select>
+    
+                        <select id="selShoe" class="form-select mb-2" required>
+                            <option value="">Select Shoes</option>
+                        </select>
+    
+                        <button id="btnSubmit" class="btn btn-primary col-12 my-2" type="button">Place Order</button>
+                        <button id="btnClear" class="btn btn-secondary col-12" type="button">Clear Form</button>
+                    </form>
+                    <div id="divOrderSheet"> <!--container for adding order sheets-->
                     </div>
-
-                    <h3>Shipping Address</h3>
-                    <div id="divShipping">
-                        <div class="row">
-                            <div class="form-floating mb-3">
-                                <input id="txtStreet1Ship" type="text" class="form-control" placeholder="Street Address 1" aria-label="Street 1 Shipping" required>
-                                <label for="txtStreet1Ship" class="form-label text-black ms-2">Street Address 1</label>
-                                <div class="invalid-feedback">
-                                    Please enter a Shipping Address.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="form-floating mb-3">
-                                <input id="txtStreet2Ship" type="text" class="form-control" placeholder="Street Address 2" aria-label="Street 2 Shipping" >
-                                <label for="txtStreet2Ship" class="form-label text-black ms-2">Street Address 2</label>
-                            </div>
-                        </div>
-
-                        <div class="row gx-3">
-                            <div class="form-floating mb-3 col-5">
-                                <input id="txtCityShip" type="text" class="form-control" placeholder="City" aria-label="City Shipping" required>
-                                <label for="txtCityShip" class="form-label text-black ms-1">City</label>
-                                <div class="invalid-feedback">
-                                    Please enter a City.
-                                </div>
-                            </div>
-                
-                            <div class="form-floating mb-3 col-3">
-                                <input id="txtStateShip" type="text" class="form-control" maxlength="2" placeholder="State" aria-label="State Shipping" required>
-                                <label for="txtStateShip" class="form-label text-black ms-1">State</label>
-                                <div class="invalid-feedback">
-                                    Please enter a State.
-                                </div>
-                            </div>
-        
-                            <div class="form-floating mb-3 col-4">
-                                <input id="intZipCodeShip" type="number" class="form-control" placeholder="Zip Code" aria-label="Zip Code Shipping" required>
-                                <label for="intZipCodeShip" class="form-label text-black ms-1">ZIP</label>
-                                <div class="invalid-feedback">
-                                    Please enter a Zip Code.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <h3>Billing Address</h3>
-                    <input id="chkShipping" class="form-check-input" type="checkbox" aria-label="Same as Shipping">
-                    <label for="chkShipping" class="form-label">Same as Shipping Address</label>
-
-                    <div id="divBilling">
-                        <div class="row">
-                            <div class="form-floating mb-3">
-                                <input id="txtStreet1Bill" type="text" class="form-control" placeholder="Street Address 1" aria-label="Street 1 Billing">
-                                <label for="txtStreet1Bill" class="form-label text-black ms-2">Street Address 1</label>
-                                <div class="invalid-feedback">
-                                    Please enter a Billing Address.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="form-floating mb-3">
-                                <input id="txtStreet2Bill" type="text" class="form-control" placeholder="Street Address 2" aria-label="Street 2 Billing" >
-                                <label for="txtStreet2Bill" class="form-label text-black ms-2">Street Address 2</label>
-                            </div>
-                        </div>
-
-                        <div class="row gx-3">
-                            <div class="form-floating mb-3 col-5">
-                                <input id="txtCityBill" type="text" class="form-control" placeholder="City" aria-label="City Billing">
-                                <label for="txtCityBill" class="form-label text-black ms-1">City</label>
-                                <div class="invalid-feedback">
-                                    Please enter a City.
-                                </div>
-                            </div>
-                
-                            <div class="form-floating mb-3 col-3">
-                                <input id="txtStateBill" type="text" class="form-control" maxlength="2" placeholder="State" aria-label="State Billing">
-                                <label for="txtStateBill" class="form-label text-black ms-1">State</label>
-                                <div class="invalid-feedback">
-                                    Please enter a State.
-                                </div>
-                            </div>
-        
-                            <div class="form-floating mb-3 col-4">
-                                <input id="intZipCodeBill" type="number" class="form-control" placeholder="Zip Code" aria-label="Zip Code Billing">
-                                <label for="intZipCodeBill" class="form-label text-black ms-1">ZIP</label>
-                                <div class="invalid-feedback">
-                                    Please enter a Zip Code.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <select id="selTop" class="form-select">
-                        <option>Select Top</option>
-                    </select>
-
-                    <select id="selBottom" class="form-select my-2">
-                        <option>Select Bottom</option>
-                    </select>
-
-                    <select id="selShoe" class="form-select mb-2">
-                        <option>Select Shoes</option>
-                    </select>
-
-
-
-                    <button id="btnSubmit" class="btn btn-primary col-12 my-2" type="button">Place Order</button>
-                    <button id="btnClear" class="btn btn-secondary col-12" type="button">Clear Form</button>
-                </form>
+                </div>
             </div>
         </div>
-
-
+        
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
+            var intOrderNum = 0;
+            var intActiveOrders = 0;
+            var blnBilling = true;
+
+            //Get Clothing options from web service
             $.getJSON('https://www.swollenhippo.com/getTopsByAPIKey.php?APIKey=Mickey2024!', function(result){
                 let arrTops = result;
 
                 arrTops.forEach(function(Top){
-                    console.log(Top);
-                    let strHtml = `<option value="${Top.StyleID}"> ${Top.Description}</option>`;
+                    let strHtml = `<option value="${Top.StyleID}">${Top.Description}</option>`;
                     $('#selTop').append(strHtml);
                 });
             });
@@ -187,8 +194,7 @@
                 let arrBottoms = result;
 
                 arrBottoms.forEach(function(Bottom){
-                    console.log(Bottom);
-                    let strHtml = `<option value="${Bottom.StyleID}"> ${Bottom.Description}</option>`;
+                    let strHtml = `<option value="${Bottom.StyleID}">${Bottom.Description}</option>`;
                     $('#selBottom').append(strHtml);
                 });
             });
@@ -197,21 +203,298 @@
                 let arrShoes = result;
 
                 arrShoes.forEach(function(Shoe){
-                    console.log(Shoe);
-                    let strHtml = `<option value="${Shoe.StyleID}"> ${Shoe.Description}</option>`;
+                    let strHtml = `<option value="${Shoe.StyleID}">${Shoe.Description}</option>`;
                     $('#selShoe').append(strHtml);
                 });
             });
 
             $('#chkShipping').on('change', function(){
+                //Remove Billing Address Form Fields
                 $('#divBilling').slideToggle(200);
+                //toggle required attribute for each form field accordingly
+                if(blnBilling) {
+                    $('#txtStreet1Bill').removeAttr('required');
+                    $('#txtCityBill').removeAttr('required');
+                    $('#txtStateBill').removeAttr('required');
+                    $('#intZipCodeBill').removeAttr('required');
+                    blnBilling = false
+                } else {
+                    $('#txtStreet1Bill').attr('required', 'required');
+                    $('#txtCityBill').attr('required', 'required');
+                    $('#txtStateBill').attr('required', 'required');
+                    $('#intZipCodeBill').attr('required', 'required');
+                    blnBilling = true
+                }
+
             });
 
             $('#btnSubmit').on('click', function(){
+                //Read In Values From Form Fields
+                let order = {
+                    strFirstName: $('#txtFirstName').val(),
+                    strLastName: $('#txtLastName').val(),
+                    intPhoneNumber: $('#intPhone').val(),
+                    strEmail: $('#txtEmail').val(),
+                    strStreet1Ship: $('#txtStreet1Ship').val(),
+                    strStreet2Ship: $('#txtStreet2Ship').val(),
+                    strCityShip: $('#txtCityShip').val(),
+                    strStateShip: $('#txtStateShip').val(),
+                    intZipShip: $('#intZipCodeShip').val(),
+                    blnSameShip: $('#chkShipping').is(':checked'),
+                    strStreet1Bill: $('#txtStreet1Bill').val(),
+                    strStreet2Bill: $('#txtStreet2Bill').val(),
+                    strCityBill: $('#txtCityBill').val(),
+                    strStateBill: $('#txtStateBill').val(),
+                    intZipBill: $('#intZipCodeBill').val(),
+                    strTopStyle: $('#selTop').val(),
+                    strTopDescription: $('#selTop option:selected').text(),
+                    strBottomStyle: $('#selBottom').val(),
+                    strBottomDescription: $('#selBottom option:selected').text(),
+                    strShoeStyle: $('#selShoe').val(),
+                    strShoeDescription: $('#selShoe option:selected').text(),
+                }
 
+                //Form Validation
+                let blnError = false;
+                let strErrorMessage = 'The following fields are blank: ';
+                
+                if(order.strFirstName.length < 1) {
+                    blnError = true;
+                    strErrorMessage += 'First Name, ';
+                }
+                if(order.strLastName.length < 1) {
+                    blnError = true;
+                    strErrorMessage += 'Last Name, ';
+                }
+                if(order.intPhoneNumber.length < 1) {
+                    blnError = true;
+                    strErrorMessage += 'Phone Number, ';
+                }
+                if(order.strEmail.length < 1) {
+                    blnError = true;
+                    strErrorMessage += 'Email, ';
+                }
+                if(order.strStreet1Ship.length < 1) {
+                    blnError = true;
+                    strErrorMessage += 'Shipping Street Address, ';
+                }
+                if(order.strCityShip.length < 1) {
+                    blnError = true;
+                    strErrorMessage += 'Shipping City, ';
+                }
+                if(order.strStateShip.length < 1) {
+                    blnError = true;
+                    strErrorMessage += 'Shipping State, ';
+                }
+                if(order.intZipShip.length < 1) {
+                    blnError = true;
+                    strErrorMessage += 'Shipping Zip Code, ';
+                }
+                if(!order.blnSameShip) {
+                    if(order.strStreet1Bill.length < 1) {
+                        blnError = true;
+                        strErrorMessage += 'Billing Street Address, ';
+                    }
+                    if(order.strCityBill.length < 1) {
+                        blnError = true;
+                        strErrorMessage += 'Billing City, ';
+                    }
+                    if(order.strStateBill.length < 1) {
+                        blnError = true;
+                        strErrorMessage += 'Billing State, ';
+                    }
+                    if(order.intZipBill.length < 1) {
+                        blnError = true;
+                        strErrorMessage += 'Billing Zip Code, ';
+                    }
+                }
+                if(!order.strTopStyle) {
+                    blnError = true;
+                    strErrorMessage += 'Clothing Choice Top, ';
+                }
+                if(!order.strBottomStyle) {
+                    blnError = true;
+                    strErrorMessage += 'Clothing Choice Bottom, ';
+                }
+                if(!order.strShoeStyle) {
+                    blnError = true;
+                    strErrorMessage += 'Clothing Choice Shoes, ';
+                }
+                
+
+                if(blnError == true){
+                    strErrorMessage = strErrorMessage.substring(0, strErrorMessage.length-2); //Remove last comma
+                    console.log(strErrorMessage);
+                    $('.needs-validation').addClass('was-validated') //Adds class for bootstrap form validation feature
+                    Swal.fire({
+                        title: "Oops!",
+                        text: strErrorMessage,
+                        icon: "error"
+                    });
+                }else{
+                    console.log('No errors found');
+                    let strHtml = '';
+                    if(order.blnSameShip){
+                        //Create HTML String for Different Cases
+                        strHtml = `
+                            <div id="div${intOrderNum}" class="card">
+                                <div class="card-header">
+                                    <h3>Order ${intOrderNum + 1}</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <h4>Contact Information</h4>
+                                            <p>Name: ${order.strFirstName} ${order.strLastName}</p>
+                                            <p>Phone Number: ${order.intPhoneNumber}</p>
+                                            <p>Email Address: ${order.strEmail}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row g-3">
+                                        <div class="col-6">
+                                            <h4>Shipping Information</h4>
+                                            <p>${order.strStreet1Ship}</p>
+                                            <p>${order.strStreet2Ship}</p>
+                                            <p>${order.strCityShip}, ${order.strStateShip} ${order.intZipShip}</p>
+                                        </div>
+                                        <div class="col-6">
+                                            <h4>Billing Information</h4>
+                                            <p>Same as Shipping</p>
+                                        </div>
+                                    </div>
+                                    <div class="row g-3">
+                                        <div class="col-8">
+                                            <h4>Order Items</h4>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <p>Style ID</p>
+                                                </div>
+                                                <div class="col">
+                                                    <p>Description</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <p>${order.strTopStyle}</p>
+                                                </div>
+                                                <div class="col">
+                                                    <p>${order.strTopDescription}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <p>${order.strBottomStyle}</p>
+                                                </div>
+                                                <div class="col">
+                                                    <p>${order.strBottomDescription}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <p>${order.strShoeStyle}</p>
+                                                </div>
+                                                <div class="col">
+                                                    <p>${order.strShoeDescription}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button id="btnDelete" type="button" data-searched="${intOrderNum}" class="btn btn-danger col-12">Delete Order</button>
+                                </div>
+                            </div>`;
+                    } else {
+                        strHtml = `
+                            <div id="div${intOrderNum}" class="card">
+                                <div class="card-header">
+                                    <h3>Order ${intOrderNum + 1}</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <h4>Contact Information</h4>
+                                            <p>Name: ${order.strFirstName} ${order.strLastName}</p>
+                                            <p>Phone Number: ${order.intPhoneNumber}</p>
+                                            <p>Email Address: ${order.strEmail}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row g-3">
+                                        <div class="col-6">
+                                            <h4>Shipping Information</h4>
+                                            <p>${order.strStreet1Ship}</p>
+                                            <p>${order.strStreet2Ship}</p>
+                                            <p>${order.strCityShip}, ${order.strStateShip} ${order.intZipShip}</p>
+                                        </div>
+                                        <div class="col-6">
+                                            <h4>Billing Information</h4>
+                                            <p>${order.strStreet1Bill}</p>
+                                            <p>${order.strStreet2Bill}</p>
+                                            <p>${order.strCityBill}, ${order.strStateBill} ${order.intZipBill}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row g-3">
+                                        <div class="col-8">
+                                            <h4>Order Items</h4>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <p>Style ID</p>
+                                                </div>
+                                                <div class="col">
+                                                    <p>Description</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <p>${order.strTopStyle}</p>
+                                                </div>
+                                                <div class="col">
+                                                    <p>${order.strTopDescription}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <p>${order.strBottomStyle}</p>
+                                                </div>
+                                                <div class="col">
+                                                    <p>${order.strBottomDescription}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <p>${order.strShoeStyle}</p>
+                                                </div>
+                                                <div class="col">
+                                                    <p>${order.strShoeDescription}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button id="btnDelete" type="button" data-searched="${intOrderNum}" class="btn btn-danger col-12">Delete Order</button>
+                                </div>
+                            </div>`;
+                    }
+                    $('#divOrderSheet').append(strHtml);
+                    $('#divMain').removeClass('align-items-center');
+                    intOrderNum += 1;
+                    intActiveOrders += 1;
+                    console.log(order);
+                }
+
+    
+                
+            });
+
+            $(document).on('click', '#btnDelete', function(){
+                //Delete Current Order Sheet Card
+                $(this).parent().parent().remove();
+                //Keep track of active order sheets so that formatting can be corrected accordingly
+                intActiveOrders -= 1;
+                if(intActiveOrders == 0) {
+                    $('#divMain').addClass('align-items-center');
+                }
             });
             
             $('#btnClear').on('click', function(){
+                //Clear values of all fields
                 $('#txtFirstName').val('');
                 $('#txtLastName').val('');
                 $('#txtStreet1Ship').val('');
@@ -226,10 +509,10 @@
                 $('#intZipCodeBill').val('');
                 $('#intPhone').val('');
                 $('#txtEmail').val('');
-                $('#selTop').val('Select Top');
-                $('#selBottom').val('Select Bottom');
-                $('#selShoe').val('Select Shoes');
-                $('.needs-validation').removeClass('was-validated');
+                $('#selTop option:selected').text('Select Top');
+                $('#selBottom option:selected').text('Select Bottom');
+                $('#selShoe option:selected').text('Select Shoes');
+                $('.needs-validation').removeClass('was-validated'); //remove class for bootstrap validation feature
             });
 
         </script>
