@@ -68,6 +68,19 @@
                     </form>
                 </div>
             </div>
+
+            <div class="card col-12 col-md-10 col-lg-9" id="divDashboard" style="display: none;">
+                <div class="card-header">
+                    <h3>Dashboard</h3>
+                </div>
+                <div class="card-body">
+                    This is a Dashboard
+                    <button class="btn btn-danger col-12" id="btnLogout" type="button">Logout</button>
+                </div>
+            </div>
+
+
+
         </div>
 
 
@@ -79,6 +92,27 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
         <script>
+            $.getJSON('https://www.thesimplehomestead.com/simpletime/sessions.php', {SessionID:sessionStorage.getItem('SimpleSession')}, function(sessionDetails) {
+                if(sessionDetails.Email) {
+                    $('#divLogin').slideUp(function() {
+                        $('#divDashboard').slideDown();
+                    });
+                }
+            });
+
+            $('#btnLogout').on('click', function() {
+                $.ajax({
+                    url:`https://www.thesimplehomestead.com/simpletime/sessions.php`,
+                    type:'DELETE',
+                    data: {SessionID:sessionStorage.getItem('SimpleSession')},
+                    success: function(result) {
+                        sessionStorage.removeItem('SimpleSession');
+                        $('#divDashboard').slideUp(function() {
+                            $('#divLogin').slideDown();
+                        });
+                    }
+                })
+            })
 
             $('.btnToggle').on('click', function() {
                 let strCard = $(this).attr('data-card');
@@ -109,6 +143,8 @@
                         result = JSON.parse(result);
                         console.log(result);
                         sessionStorage.setItem('SimpleSession', result.SessionID);
+
+                        
                     })
                 }
             });
