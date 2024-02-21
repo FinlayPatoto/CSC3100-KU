@@ -92,8 +92,24 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
         <script>
+            function updateSession(strSessionID) {
+                $.ajax({
+                    url: 'https://www.thesimplehomestead.com/simpletime/sessions.php',
+                    type: 'PUT',
+                    data: {SessionID:strSessionID},
+                    success: function(result) {
+                        console.log(result);
+                    }
+                });
+            }
+
             $.getJSON('https://www.thesimplehomestead.com/simpletime/sessions.php', {SessionID:sessionStorage.getItem('SimpleSession')}, function(sessionDetails) {
-                if(sessionDetails.Email) {
+                console.log(sessionDetails);
+                if(!sessionDetails) {
+                    $('#divLogin').slideUp(function() {
+                        $('#divDashboard').slideDown();
+                    });
+                } else if(sessionDetails.Email) {
                     $('#divLogin').slideUp(function() {
                         $('#divDashboard').slideDown();
                     });
