@@ -10,7 +10,7 @@
    
     <div class="container-fluid">
         <div class="row flex-nowrap">
-            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-body-tertiary">
+            <div id="divSidebar" class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-body-tertiary">
                 <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                     <a class="link-body-emphasis text-decoration-none ms-2 mb-4">
                         <i class="bi-list-task fs-4"></i>
@@ -19,28 +19,31 @@
                     <nav class="border-top pt-4">
                         <ul class="nav nav-pills flex-column">
                             <li class="nav-item">
-                                <a class="nav-link active link-body-emphasis" type="button">
+                                <button id="btnAllTasks" class="nav-link active link-body-emphasis" type="button">
                                     <i class="bi-clipboard"></i>
                                     <span class="ms-2 d-none d-md-inline">All Tasks</span>
-                                </a>
+                                </button>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link link-body-emphasis" type="button">
+                                <button id="btnScheduled" class="nav-link link-body-emphasis" type="button">
                                     <i class="bi-calendar-check"></i>
                                     <span class="ms-2 d-none d-md-inline">Scheduled</span>
-                                </a>
+                                </button>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link link-body-emphasis" type="button">
+                                <button id="btnCompleted" class="nav-link link-body-emphasis" type="button">
                                     <i class="bi-clipboard-check"></i>
                                     <span class="ms-2 d-none d-md-inline">Completed</span>
-                                </a>
+                                </button>
                             </li>
                         </ul>
                     </nav>
                 </div>
             </div>
-            <div class="col py-3">
+
+
+
+            <div id="divTasks" class="col py-3">
                 <div class="card mx-3">
                     <div class="card-header">
                         <h4>Tasks</h4>
@@ -51,6 +54,8 @@
                             <p class="text-center pt-4">No tasks at the moment</p>
                         </div>
 
+
+
                         <div id="divTask" class="row border-bottom d-none">
                             <a id="ancTask0" type="button" class="py-3 text-decoration-none text-body-emphasis">
                                 <i class="col bi-circle"></i>
@@ -60,22 +65,123 @@
 
                         
 
+                    </div>
+                </div>
+            </div>
 
+
+
+            <div id="divScheduled" class="col py-3" style="display: none;">
+                <div class="card mx-3">
+                    <div class="card-header">
+                        <h4>Scheduled</h4>
+                    </div>
+                    <div class="card-body bg-body-tertiary pt-0"> 
+                        <div class="row">
+                            <div class="col">
+                                <h2 id="txtMonthYear">Event Calendar</h2>
+                                <div class="mb-3 row">
+                                    <div class="col d-flex justify-content-start">
+                                        <button id="btnMonthP" class="btn btn-primary me-2" type="button">Previous</button>
+                                        <button id="btnMonthN" class="btn btn-primary" type="button">Next</button>
+                                    </div>
+                                    <div class="col d-flex justify-content-end">
+                                        <button id="btnToday" class="btn btn-primary" type="button">Today</button>
+                                    </div>
+                                </div>
+                                <div id="divCalendar">
+                                    <table class="table table-bordered" style="table-layout: fixed; min-height: 60vh;">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 14%;">Sun</th>
+                                                <th style="width: 14%;">Mon</th>
+                                                <th style="width: 14%;">Tues</th>
+                                                <th style="width: 14%;">Wed</th>
+                                                <th style="width: 14%;">Thurs</th>
+                                                <th style="width: 14%;">Fri</th>
+                                                <th style="width: 14%;">Sat</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            
+            <div id="divCompleted" class="col py-3" style="display: none;">
+                <div class="card mx-3">
+                    <div class="card-header">
+                        <h4>Completed</h4>
+                    </div>
+                    <div class="card-body bg-body-tertiary pt-0">
+
+                        <div id="divNoTaskCompleted" class="row">
+                            <p class="text-center pt-4">No completed tasks at the moment</p>
+                        </div>
+                        
 
                     </div>
                 </div>
             </div>
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
     </div>
 
 
     <div class="position-fixed bottom-0 end-0 mb-5 me-5">
-        <button type="button" class="btn btn-primary rounded-circle d-flex align-items-center" data-toggle="popover" data-bs-content="Add Task" data-bs-trigger="hover" aria-label="Add Task">
+        <button id="btnAddTask" type="button" class="btn btn-primary rounded-circle d-flex align-items-center" data-toggle="popover" data-bs-content="Add Task" data-bs-trigger="hover" aria-label="Add Task">
             <i class="bi-plus h2"></i>
         </button>
     </div>
 
 
+    <div class="modal fade" id="divNewTask" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Add Task</h1>
+                    <button id="btnClose" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="d-flex justify-content-center row">
+                        <div class="form-floating mb-3 row">
+                            <input id="txtNewTask" type="text" class="form-control" placeholder="Title" aria-label="Title" required>
+                            <label for="txtNewTask" class="form-label ms-2">Title</label>
+                            <div class="invalid-feedback">
+                                Please enter a title.
+                            </div>
+                        </div>
+                        <div class="form-floating mb-3 row">
+                        <input id="txtDueDate" type="datetime-local" class="form-control" placeholder="Due Date" aria-label="Date">
+                            <label for="txtDueDate" class="form-label ms-2">Due Date</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnAdd" class="btn btn-primary col me-3" type="button">Add Task</button>
+                    <button id="btnCancel" class="btn btn-danger col" type="button" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
@@ -84,8 +190,151 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script> 
+        var intCurrState = 0 //0 = all tasks; 1 = scheduled; 2 = completed
+        var arrMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        var objCurrCalDate = new Date(); //For keeping track of date/month on calendar
+        var objCurrDate = new Date(); //For keeping track of actual date
+        var objTask = {};
+        
+        function fillCalendar(month, year) {
+            let objFirst = new Date(year, month, 1);
+            let objLast = new Date(year, month + 1, 0);
+            let strDays = '<tr>';
+
+            for(let i = 0; i < objFirst.getDay(); i++) {
+                strDays += '<td></td>';
+            }
+
+            for(let i = 1; i <= objLast.getDate(); i++) {
+                if(objFirst.getDay() == 0) {
+                    strDays += '<tr>';
+                } 
+                
+                if(objCurrDate.getDate() === i && objCurrDate.getMonth() === month && objCurrDate.getFullYear() === year) {
+                    strDays += `<td id="td${i}" class="bg-secondary p-0"><button class="btn w-100" type="button"><div class="row mb-1"><p class="col ps-2 text-start m-0">${i}</p></div></button></td>`;
+                } else {
+                    strDays += `<td id="td${i}" class="p-0"><button class="btn w-100" type="button"><div class="row mb-1"><p class="col ps-2 text-start m-0">${i}</p></div></button></td>`;
+                }
+
+                if(objFirst.getDay() == 6) {
+                    strDays += '</tr>'
+                }
+
+                objFirst.setDate(objFirst.getDate() + 1);
+            }
+
+            for(let i = objLast.getDay(); i < 6; i++) {
+                strDays += '<td></td>';
+            }
+
+            $('#divCalendar tbody').html(strDays);
+            $('#txtMonthYear').text(`${arrMonths[objCurrCalDate.getMonth()]} ${objCurrCalDate.getFullYear()}`);
+        }
+
+        function addTaskToCal(task){
+            //add a row of color success with title of task
+            if(task.date.getFullYear() == objCurrCalDate.getFullYear() && task.date.getMonth() == objCurrCalDate.getMonth()) {
+                $(`#td${task.date.getDate()} button`).append(`<div class="row bg-success mb-1 p-1"><div class="col ps-2 text-start overflow-auto"><p class="m-0 text-truncate">${task.title}</p></div></div>`)
+            }
+
+        }
+
         $(document).ready(function(){
             $('[data-toggle="popover"]').popover();
+            fillCalendar(objCurrCalDate.getMonth(), objCurrCalDate.getFullYear());
+        });
+
+        //Buttons on calendar
+        $('#btnMonthN').on('click', function() {
+            objCurrCalDate.setMonth(objCurrCalDate.getMonth() + 1);
+            fillCalendar(objCurrCalDate.getMonth(), objCurrCalDate.getFullYear());
+        });
+
+        $('#btnMonthP').on('click', function() {
+            objCurrCalDate.setMonth(objCurrCalDate.getMonth() - 1);
+            fillCalendar(objCurrCalDate.getMonth(), objCurrCalDate.getFullYear());
+        });
+
+        $('#btnToday').on('click', function() {
+            objCurrCalDate = new Date();
+            fillCalendar(objCurrCalDate.getMonth(), objCurrCalDate.getFullYear());
+        });
+
+
+        //Buttons on Modal
+        $('#btnAddTask').on('click', function() {
+            $('#divNewTask').modal('show')
+        });
+
+        $('#btnAdd').on('click', function() {
+            let strTitle = $('#txtNewTask').val();
+            let objTaskDate = new Date($('#txtDueDate').val());
+            let objTask = {
+                title: strTitle,
+                date: objTaskDate
+            }
+            addTaskToCal(objTask);
+        })
+
+        $('#btnCancel').on('click', function() {
+            $('#txtNewTask').val('');
+            $('#txtDate').val('');
+        });
+
+        $('#btnClose').on('click', function() {
+            $('#txtNewTask').val('');
+            $('#txtDate').val('');
+        });
+
+        //Buttons on sidebar
+        $('#btnAllTasks').on('click', function() {
+            
+            if(intCurrState == 1) {
+                $('#divScheduled').slideToggle(800, function() {
+                    $('#divTasks').slideToggle(800);
+                });
+            } else if(intCurrState == 2) {
+                $('#divCompleted').slideToggle(800, function() {
+                    $('#divTasks').slideToggle(800);
+                });
+            }
+            intCurrState = 0;
+
+            $('.nav-link').removeClass('active');
+            $('#btnAllTasks').addClass('active');
+        
+        });
+
+        $('#btnScheduled').on('click', function() {
+            if(intCurrState == 0) {
+                $('#divTasks').slideToggle(800, function() {
+                    $('#divScheduled').slideToggle(800);
+                });
+            } else if(intCurrState == 2) {
+                $('#divCompleted').slideToggle(800, function() {
+                    $('#divScheduled').slideToggle(800);
+                });
+            }
+            intCurrState = 1;
+
+            $('.nav-link').removeClass('active');
+            $('#btnScheduled').addClass('active');
+        });
+
+        $('#btnCompleted').on('click', function() {
+            if(intCurrState == 0) {
+                $('#divTasks').slideToggle(800, function() {
+                    $('#divCompleted').slideToggle(800);
+                });
+            } else if(intCurrState == 1) {
+                $('#divScheduled').slideToggle(800, function() {
+                    $('#divCompleted').slideToggle(800);
+                });
+            }
+            intCurrState = 2;
+
+            $('.nav-link').removeClass('active');
+            $('#btnCompleted').addClass('active');
         });
     </script>
 </body>
