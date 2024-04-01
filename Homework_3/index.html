@@ -30,7 +30,7 @@
                                     <span class="ms-2 d-none d-md-inline">Scheduled</span>
                                 </button>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item border-bottom pb-3">
                                 <button id="btnCompleted" class="nav-link link-body-emphasis" type="button">
                                     <i class="bi-clipboard-check"></i>
                                     <span class="ms-2 d-none d-md-inline">Completed</span>
@@ -38,6 +38,12 @@
                             </li>
                         </ul>
                     </nav>
+                    <div class="border-top">
+                        <button id="btnAddGroup" class="btn">
+                            <i class="bi-plus fs-4"></i>
+                            <span class="ms-2 d-none d-md-inline">Add Group</span>
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -170,8 +176,17 @@
                             </div>
                         </div>
                         <div class="form-floating mb-3 row">
-                        <input id="txtDueDate" type="datetime-local" class="form-control" placeholder="Due Date" aria-label="Date">
+                            <input id="txtDueDate" type="datetime-local" class="form-control" placeholder="Due Date" aria-label="Date">
                             <label for="txtDueDate" class="form-label ms-2">Due Date</label>
+                        </div>
+                        <div class="form-floating mb-3 row">
+                            <textarea class="form-control" placeholder="Instructions or Comments" id="txtInstructions" style="height: 100px;" aria-label="Instructions or Comments"></textarea>
+                            <label for="txtInstructions" class="form-label ms-2">Instructions or Comments</label>
+                        </div>
+                        <div>
+                            
+
+
                         </div>
                     </form>
                 </div>
@@ -195,6 +210,7 @@
         var objCurrCalDate = new Date(); //For keeping track of date/month on calendar
         var objCurrDate = new Date(); //For keeping track of actual date
         var objTask = {};
+        var strMapAPIKey = "AIzaSyANdeGkdJ2pUrmrQ7OcZ3CkLx1FV2H_zDM"
         
         function fillCalendar(month, year) {
             let objFirst = new Date(year, month, 1);
@@ -268,34 +284,33 @@
 
         $('#btnAdd').on('click', function() {
             let strTitle = $('#txtNewTask').val();
-            let objTaskDate = new Date($('#txtDueDate').val());
-            let objTask = {
-                title: strTitle,
-                date: objTaskDate
-            }
-            addTaskToCal(objTask);
+            let objTaskDate = $('#txtDueDate').val();
+            
+            
         })
 
         $('#btnCancel').on('click', function() {
             $('#txtNewTask').val('');
-            $('#txtDate').val('');
+            $('#txtDueDate').val('');
+            $('#txtInstructions').val('');
         });
 
         $('#btnClose').on('click', function() {
             $('#txtNewTask').val('');
-            $('#txtDate').val('');
+            $('#txtDueDate').val('');
+            $('#txtInstructions').val('');
         });
 
         //Buttons on sidebar
         $('#btnAllTasks').on('click', function() {
             
             if(intCurrState == 1) {
-                $('#divScheduled').slideToggle(800, function() {
-                    $('#divTasks').slideToggle(800);
+                $('#divScheduled').hide(0, function() {
+                    $('#divTasks').show();
                 });
             } else if(intCurrState == 2) {
-                $('#divCompleted').slideToggle(800, function() {
-                    $('#divTasks').slideToggle(800);
+                $('#divCompleted').hide(0, function() {
+                    $('#divTasks').show();
                 });
             }
             intCurrState = 0;
@@ -307,12 +322,12 @@
 
         $('#btnScheduled').on('click', function() {
             if(intCurrState == 0) {
-                $('#divTasks').slideToggle(800, function() {
-                    $('#divScheduled').slideToggle(800);
+                $('#divTasks').hide(0, function() {
+                    $('#divScheduled').show();
                 });
             } else if(intCurrState == 2) {
-                $('#divCompleted').slideToggle(800, function() {
-                    $('#divScheduled').slideToggle(800);
+                $('#divCompleted').hide(0, function() {
+                    $('#divScheduled').show();
                 });
             }
             intCurrState = 1;
@@ -323,12 +338,12 @@
 
         $('#btnCompleted').on('click', function() {
             if(intCurrState == 0) {
-                $('#divTasks').slideToggle(800, function() {
-                    $('#divCompleted').slideToggle(800);
+                $('#divTasks').hide(0, function() {
+                    $('#divCompleted').show();
                 });
             } else if(intCurrState == 1) {
-                $('#divScheduled').slideToggle(800, function() {
-                    $('#divCompleted').slideToggle(800);
+                $('#divScheduled').hide(0, function() {
+                    $('#divCompleted').show();
                 });
             }
             intCurrState = 2;
