@@ -1,4 +1,4 @@
-const express = requre('express');
+const express = require('express');
 const cors = require('cors');
 const sqlite3 = require('sqlite3').verbose();
 
@@ -15,6 +15,33 @@ app.use(cors());
 app.get('/', (req, res, next) => {
     let strCommand = "select * from tblTasks";
     db.all(strCommand, (err, row) => {
+        if(err) {
+            res.status(400).json({error: err.message});
+        } else {
+            res.status(200).json({message: 'Success', outcome: row});
+        }
+    })
+})
+
+
+
+//get all groups
+app.get('/group', (req, res, next) => {
+    let strCommand = "select * from tblGroups";
+    db.all(strCommand, (err, row) => {
+        if(err) {
+            res.status(400).json({error: err.message});
+        } else {
+            res.status(200).json({message: 'Success', outcome: row});
+        }
+    })
+})
+
+//get all tasks of certain group
+app.get('/group', (req, res, next) => {
+    let arrParams = [req.query.group];
+    let strCommand = "select * from tblTasks where Group = ?";
+    db.all(strCommand, arrParams, (err, row) => {
         if(err) {
             res.status(400).json({error: err.message});
         } else {
@@ -51,7 +78,7 @@ app.post('/task', (req, res, next) => {
 
     let strCommand = "insert into tblTasks values(?, ?, ?, ?, ?)";
     if(arrParams[0] && arrParams[4]) {
-        db.all(strCommand, arrParams, (err, result) => {
+        db.run(strCommand, arrParams, (err, result) => {
             if(err) {
                 res.status(400).json({error: err.message});
             } else {
@@ -60,6 +87,28 @@ app.post('/task', (req, res, next) => {
         })
     } else {
         res.status(400).json({error: 'Must provide task name and group'});
+    }
+})
+
+
+//create new group
+app.post('/group', (req, res, next) => {
+    let arrParams = [req.query.group, req.query.color];
+
+    console.log(arrParams);
+    
+
+    let strCommand = "INSERT INTO tblGroups (GroupName, GroupColor) VALUES(?, ?)";
+    if(arrParams[0] && arrParams[1]) {
+        db.run(strCommand, arrParams, (err, result) => {
+            if(err) {
+                res.status(400).json({error: err.message});
+            } else {
+                res.status(200).json({message: 'Success', outcome: result});
+            }
+        })
+    } else {
+        res.status(400).json({error: 'Must provide group name and color'});
     }
 })
 
