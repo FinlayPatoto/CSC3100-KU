@@ -113,14 +113,35 @@ app.post('/group', (req, res, next) => {
 })
 
 
+//delete certain group
+app.delete('/group', (req, res, next) => {
+    let arrParams = [req.query.groupID];
+    console.log(arrParams)
+
+    let strCommand = "DELETE FROM tblGroups WHERE GroupID = ?";
+    if(arrParams[0]) {
+        db.run(strCommand, arrParams, (err) => {
+            if(err) {
+                console.log(err.message)
+                res.status(400).json({error: err.message});
+            } else {
+                res.status(200).json({message: 'Success', outcome: `${this.changes} row(s) affected`});
+            }
+        })
+    } else {
+        console.log("params")
+        res.status(400).json({error: 'Must provide a groupID'});
+    }
+})
+
 
 //delete certain task
 app.delete('/task', (req, res, next) => {
     let arrParams = [req.query.taskid];
 
-    let strCommand = "delete from tblTasks where TaskID = ?";
-    if(arrParams[1]) {
-        db.all(strCommand, arrParams, (err, row) => {
+    let strCommand = "DELETE FROM tblTasks WHERE TaskID = ?";
+    if(arrParams[0]) {
+        db.run(strCommand, arrParams, (err) => {
             if(err) {
                 res.status(400).json({error: err.message});
             } else {
