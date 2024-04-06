@@ -174,7 +174,7 @@
                     <button id="btnClose" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="d-flex justify-content-center row">
+                    <form id="formTask" class="d-flex justify-content-center row">
                         <div class="form-floating mb-3 row">
                             <input id="txtNewTask" type="text" class="form-control" placeholder="Title" aria-label="Title" required>
                             <label for="txtNewTask" class="form-label ms-2">Title</label>
@@ -383,7 +383,25 @@
             let strLocation = $('#txtLocation').val();
             let strGroupID = $('#selGroup').val();
             
-
+            if(strTitle.length < 1) {
+                $('#formTask').addClass('was-validated');
+                Swal.fire({
+                    toast: true,
+                    icon: 'error',
+                    title: 'Oops!',
+                    text: 'Please provide a valid task name.'
+                })
+            } else {
+                let strTaskID = new Date();
+                strTaskID = `${strTaskID.getFullYear()}${strTaskID.getMonth()}${strTaskID.getDate()}${strTaskID.getHours()}${strTaskID.getMinutes()}${strTaskID.getSeconds()}${strTaskID.getMilliseconds()}`;
+                $.post(`http://localhost:8000/task?name=${strTitle}&date=${strTaskDate}&location=${strLocation}&instructions=${strInstructions}&group=${strGroupID}&taskID=${strTaskID}`, function(result) {
+                    if(result.error) {
+                        console.log(result.error);
+                    } else {
+                        console.log(result);
+                    }
+                });
+            }
 
 
 
@@ -395,7 +413,8 @@
             $('#txtDueDate').val('');
             $('#txtInstructions').val('');
             $('#txtLocation').val('');
-            $('#selGroup').prop('selectedIndex', 0)
+            $('#selGroup').prop('selectedIndex', 0);
+            $('#formTask').removeClass('was-validated');
         });
 
 
@@ -458,12 +477,7 @@
                             $.ajax({
                                 url: `http://localhost:8000/group?groupID=${strID}`,
                                 type: 'DELETE',
-                                success: function(result) {
-                                    Swal.fire({
-                                        icon: 'error',
-                                        toast: true,
-                                        text: `"${$(this).text()}" was deleted successfully.`
-                                    }); 
+                                success: function(result) { 
                                 }
                             });
                         }

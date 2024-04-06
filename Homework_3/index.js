@@ -4,6 +4,7 @@ const sqlite3 = require('sqlite3').verbose();
 
 const dbSource = 'todo.db';
 const db = new sqlite3.Database(dbSource);
+db.run('PRAGMA foreign_keys = ON;');
 
 const HTTP_PORT = 8000;
 
@@ -73,10 +74,9 @@ app.get('/schedule', (req, res, next) => {
 
 //Create new task
 app.post('/task', (req, res, next) => {
-    let arrParams = [req.query.name, req.query.date, req.query.location, req.query.instructions, req.query.group];
+    let arrParams = [req.query.name, req.query.date, req.query.location, req.query.instructions, req.query.group, req.query.taskID];
     
-
-    let strCommand = "insert into tblTasks values(?, ?, ?, ?, ?)";
+    let strCommand = "insert into tblTasks values(?, ?, ?, ?, ?, 0, ?)";
     if(arrParams[0] && arrParams[4]) {
         db.run(strCommand, arrParams, (err, result) => {
             if(err) {
@@ -94,9 +94,6 @@ app.post('/task', (req, res, next) => {
 //create new group
 app.post('/group', (req, res, next) => {
     let arrParams = [req.query.group, req.query.color];
-
-    console.log(arrParams);
-    
 
     let strCommand = "INSERT INTO tblGroups (GroupName, GroupColor) VALUES(?, ?)";
     if(arrParams[0] && arrParams[1]) {
@@ -116,7 +113,6 @@ app.post('/group', (req, res, next) => {
 //delete certain group
 app.delete('/group', (req, res, next) => {
     let arrParams = [req.query.groupID];
-    console.log(arrParams)
 
     let strCommand = "DELETE FROM tblGroups WHERE GroupID = ?";
     if(arrParams[0]) {
