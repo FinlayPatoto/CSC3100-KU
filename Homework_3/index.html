@@ -10,33 +10,20 @@
 <body>
    
     <div class="container-fluid">
-        <div class="row flex-nowrap">
+        <div id="divMain" class="row flex-nowrap">
             <div id="divSidebar" class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-body-tertiary">
                 <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                     <a class="link-body-emphasis text-decoration-none ms-2 mb-4">
                         <i class="bi-list-task fs-4"></i>
                         <span class="ms-2 d-none d-md-inline fs-4">To Do</span>
                     </a>
-                    <nav class="border-top pt-4">
+                    <nav class="border-top pt-3">
                         <ul id="ulNav" class="nav nav-pills flex-column">
-                            <li class="nav-item">
-                                <button id="btnAllTasks" data-navID="T" class="nav-link active link-body-emphasis btnNav" type="button">
-                                    <i class="bi-clipboard"></i>
-                                    <span class="ms-2 d-none d-md-inline">All Tasks</span>
-                                </button>
-                            </li>
-
-                            <li class="nav-item">
-                                <button id="btnScheduled" data-navID="S" class="nav-link link-body-emphasis btnNav" type="button">
-                                    <i class="bi-calendar-check"></i>
-                                    <span class="ms-2 d-none d-md-inline">Scheduled</span>
-                                </button>
-                            </li>
 
                             <li class="nav-item border-bottom pb-3">
-                                <button id="btnCompleted" data-navID="C" class="nav-link link-body-emphasis btnNav" type="button">
-                                    <i class="bi-clipboard-check"></i>
-                                    <span class="ms-2 d-none d-md-inline">Completed</span>
+                                <button id="btnScheduled" data-navID="S" class="nav-link active link-body-emphasis btnNav" type="button">
+                                    <i class="bi-calendar-check"></i>
+                                    <span class="ms-2 d-none d-md-inline">Scheduled</span>
                                 </button>
                             </li>
 
@@ -53,37 +40,7 @@
                 </div>
             </div>
 
-
-
-            <div id="divT" data-cardID="T" class="col py-3 divTasks">
-                <div class="card mx-3">
-                    <div class="card-header">
-                        <h4>Tasks</h4>
-                    </div>
-                    <div class="card-body bg-body-tertiary pt-0">
-
-                        <div id="divNoTask" class="row">
-                            <p class="text-center pt-4">No tasks at the moment</p>
-                        </div>
-
-
-
-                        <div id="divTask" class="row border-bottom d-none">
-                            <a id="ancTask0" type="button" class="py-3 text-decoration-none text-body-emphasis">
-                                <i class="col bi-circle"></i>
-                                <span class="col ms-3">Task goes here</span>
-                            </a>
-                        </div>
-
-                        
-
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div id="divS" data-cardID="S" class="col py-3 divTasks" style="display: none;">
+            <div id="divS" data-cardID="S" class="col py-3 divTasks">
                 <div class="card mx-3">
                     <div class="card-header">
                         <h4>Scheduled</h4>
@@ -124,35 +81,6 @@
                     </div>
                 </div>
             </div>
-
-
-            
-            <div id="divC" data-cardID="C" class="col py-3 divTasks" style="display: none;">
-                <div class="card mx-3">
-                    <div class="card-header">
-                        <h4>Completed</h4>
-                    </div>
-                    <div class="card-body bg-body-tertiary pt-0">
-
-                        <div id="divNoTaskCompleted" class="row">
-                            <p class="text-center pt-4">No completed tasks at the moment</p>
-                        </div>
-                        
-
-                    </div>
-                </div>
-            </div>
-
-
-
-
-
-
-
-
-
-
-
 
         </div>
     </div>
@@ -195,7 +123,7 @@
                             <label for="txtLocation" class="form-label ms-2">Location</label>
                         </div>
                         <div class="form-floating mb-3 row">
-                            <select class="form-select" id="selGroup" aria-label="Group">
+                            <select class="form-select" id="selGroup" aria-label="Group" required>
                                 <option value="" selected disabled>No groups created</option>
                             </select>
                             <label for="selGroup" class="form-label ms-2">Group</label>
@@ -244,6 +172,44 @@
     </div>
 
 
+    <div class="modal fade" id="divTaskInfo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">
+                        <i class="col-auto bi-circle text-start"></i>
+                        <span id="spanTaskName" class="col ms-3 text-start"></span>
+                    </h1>
+                    <button id="btnCloseG" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="divTaskInfoBody" class="modal-body pe-4">
+                    <div class="row">
+                        <span class="col-auto font-weight-bold">Due Date:</span>
+                        <span id="spanTaskDate" class="col"></span>
+                    </div>
+                    <div class="row">
+                        <span class="col-auto font-weight-bold">Instructions/Comments:</span>
+                        <span id="spanTaskInstructions" class="col"></span>
+                    </div>
+                    <div class="row">
+                        <span class="col-auto font-weight-bold">Location:</span>
+                        <span id="spanTaskLocation" class="col"></span>
+                    </div>
+                    <div class="row">
+                        <span class="col-auto font-weight-bold">Group:</span>
+                        <span id="spanTaskGroup" class="col"></span>
+                    </div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button id="btnComplete" class="btn btn-primary col me-3" type="button">Complete Task</button>
+                    <button id="btnCancelT" class="btn btn-danger col" type="button" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
     <!--Maps API Key = "AIzaSyANdeGkdJ2pUrmrQ7OcZ3CkLx1FV2H_zDM"-->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANdeGkdJ2pUrmrQ7OcZ3CkLx1FV2H_zDM&loading=async&libraries=places"></script>
@@ -260,7 +226,7 @@
         function fillCalendar(month, year) {
             let objFirst = new Date(year, month, 1); //get first day of month
             let objLast = new Date(year, month + 1, 0); //get last day of month
-            let strDays = '<tr>';
+            let strDays = '<tr style="height: 100px">';
 
             // Make blanks for days of previous month
             for(let i = 0; i < objFirst.getDay(); i++) {
@@ -271,14 +237,14 @@
             for(let i = 1; i <= objLast.getDate(); i++) {
                 // If Monday then start new row
                 if(objFirst.getDay() == 0) {
-                    strDays += '<tr>';
+                    strDays += '<tr style="height: 100px">';
                 } 
                 
                 // Highlight current day if in current month and year
                 if(objCurrDate.getDate() === i && objCurrDate.getMonth() === month && objCurrDate.getFullYear() === year) {
-                    strDays += `<td id="td${i}" class="bg-secondary p-0"><button class="btn w-100" type="button"><div class="row mb-1"><p class="col ps-2 text-start m-0">${i}</p></div></button></td>`;
+                    strDays += `<td id="td${i}" class="bg-secondary p-0"><div class="mb-1"><p class="col ms-2 text-start">${i}</p></div></td>`;
                 } else {
-                    strDays += `<td id="td${i}" class="p-0"><button class="btn w-100" type="button"><div class="row mb-1"><p class="col ps-2 text-start m-0">${i}</p></div></button></td>`;
+                    strDays += `<td id="td${i}" class="p-0"><div class="mb-1"><p class="col ms-2 text-start">${i}</p></div></td>`;
                 }
 
                 // If Saturday then end row
@@ -299,30 +265,95 @@
             $('#txtMonthYear').text(`${arrMonths[objCurrCalDate.getMonth()]} ${objCurrCalDate.getFullYear()}`);
         }
 
-        function addTaskToCal(task){
+        function addTasksToCal(){
             //add a row of color success with title of task
-            if(task.date.getFullYear() == objCurrCalDate.getFullYear() && task.date.getMonth() == objCurrCalDate.getMonth()) {
-                $(`#td${task.date.getDate()} button`).append(`<div class="row bg-success mb-1 p-1"><div class="col ps-2 text-start overflow-auto"><p class="m-0 text-truncate">${task.title}</p></div></div>`)
-            }
+            console.log(objCurrCalDate.getMonth())
+            $.getJSON(`http://localhost:8000/schedule?year=${objCurrCalDate.getFullYear()}&month=${objCurrCalDate.getMonth() + 1}`, function(result) {
+                console.log(result.outcome)
+                if(result.outcome.length > 0) {
+                    result.outcome.forEach(task => {
+                        $.getJSON(`http://localhost:8000/group?groupID=${task.GroupID}`, function(result) {
+                            let objTaskDate = new Date(task.DueDate)
+                            $(`#td${objTaskDate.getDate()} div`).append(`<button data-taskID="${task.TaskID}" style="background-color: ${result.outcome[0].GroupColor}" class="btn ps-2 mb-1 w-100 text-start rounded-0 task" type="button">${task.TaskName}</button>`)
+                            
+                        })
+                    })
+                }
+            })
+
+
+            
 
         }
 
+        function taskInfoModal(strID) {
+            $.getJSON(`http://localhost:8000/task?taskID=${strID}`, function(result) {
+                console.log(result.outcome);
+                $('#spanTaskName').text(result.outcome[0].TaskName);
+                $('#spanTaskDate').text(result.outcome[0].DueDate);
+                $('#spanTaskInstructions').text(result.outcome[0].Instructions);
+                $('#spanTaskLocation').text(result.outcome[0].Location);
+
+                $.getJSON(`http://localhost:8000/group?groupID=${result.outcome[0].GroupID}`, function(result) {
+                    $('#spanTaskGroup').text(result.outcome[0].GroupName);
+                    $('#divTaskInfo').modal('show');
+                })
+            })
+        }
+
         $(document).ready(function(){
+            $('[data-toggle="popover"]').popover();
+            fillCalendar(objCurrCalDate.getMonth(), objCurrCalDate.getFullYear());
+            addTasksToCal();
+
+
+            // GET all groups in db and dynamically add them to different areas
             $.getJSON('http://localhost:8000/group', function(result){
                 let strHtml = ``;
 
                 if(result.outcome.length > 0) {
+                    
                     $('#selGroup').children().text('Please Select a Group');
                     result.outcome.forEach(group => {
+                        //Integer for deciding color brightness
+                        let intColorBrightness = parseInt(group.GroupColor.substr(1,2), 16) + parseInt(group.GroupColor.substr(3,4), 16) + parseInt(group.GroupColor.substr(5,7), 16);
+                        
+                        //add groups to the navbar
                         strHtml = `<li class="nav-item">
-                                            <button data-navID="${group.GroupID}" class="nav-link link-body-emphasis btnNav d-flex ps-2" type="button">
+                                            <button id="btnGroup${group.GroupID}" data-navID="${group.GroupID}" class="nav-link link-body-emphasis btnNav d-flex ps-2" type="button">
                                                 <i class="bi-list rounded-circle align-items-center justify-content-center ms-1" style="background-color: ${group.GroupColor}; width: 25px; height: 25px; line-height: 1.25;"></i>
                                                 <span class="ms-2 d-none d-md-inline">${group.GroupName}</span>
                                             </button>
                                         </li>`;
                         $('#ulNav').append(strHtml);
+
+                        //Add groups to the select box
                         strHtml = `<option value="${group.GroupID}">${group.GroupName}</option>`;
                         $('#selGroup').append(strHtml); 
+
+                        //Add group divs for holding tasks
+                        strHtml = `<div id="divGroup${group.GroupID}" data-cardID="${group.GroupID}" class="col py-3 divTasks" style="display: none;">
+                                        <div class="card mx-3">
+                                            <div class="card-header" style="background-color: ${group.GroupColor}">
+                                                <h4>${group.GroupName}</h4>
+                                            </div>
+                                            <div class="card-body bg-body-tertiary pt-0">
+
+                                                <div id="divNoTask${group.GroupID}" class="row">
+                                                    <p class="text-center pt-4">No tasks at the moment</p>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>`;
+
+                        $('#divMain').append(strHtml);
+
+                        // Check to see if color is light or dark then change text color accordingingly
+                        if(intColorBrightness >= 384) {
+                            $(`#divGroup${group.GroupID}`).children().children().first().addClass('text-black');
+                            $(`#btnGroup${group.GroupID}`).children().first().addClass('text-black');
+                        }
                     });
                 } else {
                     $('#selGroup').children().text('No Groups Created');
@@ -330,8 +361,35 @@
             });
 
 
-            $('[data-toggle="popover"]').popover();
-            fillCalendar(objCurrCalDate.getMonth(), objCurrCalDate.getFullYear());
+            $.getJSON('http://localhost:8000/', function(result) {
+                console.log(result.outcome);
+
+                let strHtml = ``;
+                if(result.outcome.length > 0) {
+                    result.outcome.forEach(task => {
+                        strHtml = `<div class="row border-bottom">
+                            <button id="btnTask${task.TaskID}" data-taskID="${task.TaskID}" type="button" class="btn py-3 text-decoration-none d-flex justify-content-left align-items-center task">
+                                <i class="col-auto bi-circle text-start"></i>
+                                <span class="col ms-3 text-start">${task.TaskName}</span>
+                            </button>
+                        </div>`;
+
+                        $(`#divNoTask`).remove();
+                        $('#divT .card-body').append(strHtml)
+
+                        if(task.GroupID) {
+                            $(`#divNoTask${task.GroupID}`).remove();
+                            $(`#divGroup${task.GroupID} .card-body`).append(strHtml);
+                        }
+
+
+
+                        
+                    })
+                }
+            })
+
+
 
             let strLocation = document.getElementById('txtLocation');
             let objAutocomplete = new google.maps.places.Autocomplete(strLocation);
@@ -351,23 +409,27 @@
             $('.pac-container').css('z-index', '9999');
         }); 
 
+
         //Buttons on calendar
         $('#btnMonthN').on('click', function() {
             // Set current calendar month to next month
             objCurrCalDate.setMonth(objCurrCalDate.getMonth() + 1);
             fillCalendar(objCurrCalDate.getMonth(), objCurrCalDate.getFullYear());
+            addTasksToCal();
         });
 
         $('#btnMonthP').on('click', function() {
             // Set current calendar month to previous month
             objCurrCalDate.setMonth(objCurrCalDate.getMonth() - 1);
             fillCalendar(objCurrCalDate.getMonth(), objCurrCalDate.getFullYear());
+            addTasksToCal();
         });
 
         $('#btnToday').on('click', function() {
             // Set current calendar month to current month
             objCurrCalDate = new Date();
             fillCalendar(objCurrCalDate.getMonth(), objCurrCalDate.getFullYear());
+            addTasksToCal();
         });
 
 
@@ -383,13 +445,13 @@
             let strLocation = $('#txtLocation').val();
             let strGroupID = $('#selGroup').val();
             
-            if(strTitle.length < 1) {
+            if(strTitle.length < 1 || !strGroupID) {
                 $('#formTask').addClass('was-validated');
                 Swal.fire({
                     toast: true,
                     icon: 'error',
                     title: 'Oops!',
-                    text: 'Please provide a valid task name.'
+                    text: 'Please provide a valid task name and a group.'
                 })
             } else {
                 let strTaskID = new Date();
@@ -402,10 +464,6 @@
                     }
                 });
             }
-
-
-
-
         })
 
         $('#btnCancel, #btnClose').on('click', function() {
@@ -462,7 +520,7 @@
 
                 // Delete the group of button just clicked
                 let strID = $(this).attr('data-navID');
-                if(strID != 'S' && strID != 'C' && strID != 'T') {
+                if(strID != 'S') {
                     Swal.fire({
                         icon: 'error',
                         toast: true,
@@ -485,6 +543,11 @@
                 }
                 
             })
+
+
+            
+
+
             // Stop mouseover handler from making things execute a million different times
             $('#ulNav').unbind('mouseover');
         })
@@ -492,6 +555,56 @@
         $('#btnAddGroup').on('click', function() {
             $('#divAddGroup').modal('show');
         });
+        
+
+        
+
+
+
+        $('#divMain').mouseover(function() {
+            $('.divTask, .task').on('click', function() {
+                let strID = $(this).attr('data-taskID');
+                taskInfoModal(strID);
+                
+            })
+
+
+            $('.divTask, .task').on('contextmenu', function(rightClick) {
+                rightClick.preventDefault();
+
+                // Delete the group of button just clicked
+                let strID = $(this).attr('data-taskID');
+                
+                Swal.fire({
+                    icon: 'error',
+                    toast: true,
+                    text: `Are you sure you want to delete task "${$(this).text()}"?`,
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    showConfirmButton: false,
+                    denyButtonText: `Delete`
+                }).then((result) => {
+                    if (result.isDenied) {
+
+                        $.ajax({
+                            url: `http://localhost:8000/task?taskID=${strID}`,
+                            type: 'DELETE',
+                            success: function(result) { 
+                            }
+                        });
+                    }
+                });
+                
+                
+            })
+            $('#divMain').unbind('mouseover');
+        })
+
+
+
+       
+        
+
     </script>
 </body>
 </html>

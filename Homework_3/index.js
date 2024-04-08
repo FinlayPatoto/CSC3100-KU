@@ -18,6 +18,22 @@ app.get('/', (req, res, next) => {
     db.all(strCommand, (err, row) => {
         if(err) {
             res.status(400).json({error: err.message});
+            console.log(err.message);
+        } else {
+            res.status(200).json({message: 'Success', outcome: row});
+        }
+    })
+})
+
+
+// Get certain task
+app.get('/task', (req, res, next) => {
+    let arrParams = [req.query.taskID];
+    let strCommand = "SELECT * FROM tblTasks WHERE taskID = ?";
+    db.all(strCommand, arrParams, (err, row) => {
+        if(err) {
+            res.status(400).json({error: err.message});
+            console.log(err.message);
         } else {
             res.status(200).json({message: 'Success', outcome: row});
         }
@@ -32,19 +48,23 @@ app.get('/group', (req, res, next) => {
     db.all(strCommand, (err, row) => {
         if(err) {
             res.status(400).json({error: err.message});
+            console.log(err.message);
         } else {
             res.status(200).json({message: 'Success', outcome: row});
         }
     })
 })
 
-//get all tasks of certain group
+
+
+//get certain group
 app.get('/group', (req, res, next) => {
-    let arrParams = [req.query.group];
-    let strCommand = "select * from tblTasks where Group = ?";
-    db.all(strCommand, arrParams, (err, row) => {
+    let arrParams = [req.query.groupID];
+    let strCommand = "SELECT * FROM tblGroups WHERE GroupID = ?";
+    db.all(strCommand, (err, row) => {
         if(err) {
             res.status(400).json({error: err.message});
+            console.log(err.message);
         } else {
             res.status(200).json({message: 'Success', outcome: row});
         }
@@ -61,10 +81,11 @@ app.get('/schedule', (req, res, next) => {
     }
     let arrParams = [`${strYear}-${strMonth}%`]
 
-    let strCommand = "select * from tblTasks where DueDate like ?";
+    let strCommand = "select * from tblTasks where DueDate like ? ORDER BY DueDate";
     db.all(strCommand, arrParams, (err, row) => {
         if(err) {
             res.status(400).json({error: err.message});
+            console.log(err.message);
         } else {
             res.status(200).json({message: 'Success', outcome: row});
         }
@@ -81,6 +102,7 @@ app.post('/task', (req, res, next) => {
         db.run(strCommand, arrParams, (err, result) => {
             if(err) {
                 res.status(400).json({error: err.message});
+                console.log(err.message);
             } else {
                 res.status(200).json({message: 'Success', outcome: result});
             }
@@ -100,6 +122,7 @@ app.post('/group', (req, res, next) => {
         db.run(strCommand, arrParams, (err, result) => {
             if(err) {
                 res.status(400).json({error: err.message});
+                console.log(err.message);
             } else {
                 res.status(200).json({message: 'Success', outcome: result});
             }
@@ -120,6 +143,7 @@ app.delete('/group', (req, res, next) => {
             if(err) {
                 console.log(err.message)
                 res.status(400).json({error: err.message});
+                console.log(err.message);
             } else {
                 res.status(200).json({message: 'Success', outcome: `${this.changes} row(s) affected`});
             }
@@ -133,13 +157,14 @@ app.delete('/group', (req, res, next) => {
 
 //delete certain task
 app.delete('/task', (req, res, next) => {
-    let arrParams = [req.query.taskid];
+    let arrParams = [req.query.taskID];
 
     let strCommand = "DELETE FROM tblTasks WHERE TaskID = ?";
     if(arrParams[0]) {
         db.run(strCommand, arrParams, (err) => {
             if(err) {
                 res.status(400).json({error: err.message});
+                console.log(err.message);
             } else {
                 res.status(200).json({message: 'Success', outcome: `${this.changes} row(s) affected`});
             }
@@ -149,25 +174,6 @@ app.delete('/task', (req, res, next) => {
     }
 })
 
-
-
-//delete all tasks in database
-app.delete('/delete', (req, res, next) => {
-    let strRecieved = req.query.rows;
-
-    if(strRecieved == "all") {
-        db.all("delete from tblTasks", (err, row) => {
-            if(err) {
-                res.status(400).json({error: err.message});
-            } else {
-                res.status(200).json({message: 'Success', outcome: `${this.changes} row(s) affected`});
-            }
-        })
-    } else {
-        res.status(400).json({error: 'Must provide rows=all'});
-
-    }
-})
 
 
 
