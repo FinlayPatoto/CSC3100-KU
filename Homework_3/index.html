@@ -40,47 +40,54 @@
                 </div>
             </div>
 
-            <div id="divS" data-cardID="S" class="col py-3 divTasks">
-                <div class="card mx-3">
-                    <div class="card-header">
-                        <h4>Scheduled</h4>
-                    </div>
-                    <div class="card-body bg-body-tertiary pt-0"> 
-                        <div class="row">
-                            <div class="col">
-                                <h2 id="txtMonthYear">Event Calendar</h2>
-                                <div class="mb-3 row">
-                                    <div class="col d-flex justify-content-start">
-                                        <button id="btnMonthP" class="btn btn-primary me-2" type="button">Previous</button>
-                                        <button id="btnMonthN" class="btn btn-primary" type="button">Next</button>
+
+            <div id="divTaskWindows" class="col-sm-9">
+                <div id="divS" data-cardID="S" class="col py-3 divTasks">
+                    <div class="card mx-3">
+                        <div class="card-header">
+                            <h4>Scheduled</h4>
+                        </div>
+                        <div class="card-body bg-body-tertiary pt-0"> 
+                            <div class="row">
+                                <div class="col">
+                                    <h2 id="txtMonthYear">Event Calendar</h2>
+                                    <div class="mb-3 row">
+                                        <div class="col d-flex justify-content-start">
+                                            <button id="btnMonthP" class="btn btn-primary me-2" type="button">Previous</button>
+                                            <button id="btnMonthN" class="btn btn-primary" type="button">Next</button>
+                                        </div>
+                                        <div class="col d-flex justify-content-end">
+                                            <button id="btnToday" class="btn btn-primary" type="button">Today</button>
+                                        </div>
                                     </div>
-                                    <div class="col d-flex justify-content-end">
-                                        <button id="btnToday" class="btn btn-primary" type="button">Today</button>
+                                    <div id="divCalendar">
+                                        <table class="table table-bordered" style="table-layout: fixed; min-height: 60vh;">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 14%;">Sun</th>
+                                                    <th style="width: 14%;">Mon</th>
+                                                    <th style="width: 14%;">Tues</th>
+                                                    <th style="width: 14%;">Wed</th>
+                                                    <th style="width: 14%;">Thurs</th>
+                                                    <th style="width: 14%;">Fri</th>
+                                                    <th style="width: 14%;">Sat</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                
+                                            </tbody>
+                                        </table>
                                     </div>
-                                </div>
-                                <div id="divCalendar">
-                                    <table class="table table-bordered" style="table-layout: fixed; min-height: 60vh;">
-                                        <thead>
-                                            <tr>
-                                                <th style="width: 14%;">Sun</th>
-                                                <th style="width: 14%;">Mon</th>
-                                                <th style="width: 14%;">Tues</th>
-                                                <th style="width: 14%;">Wed</th>
-                                                <th style="width: 14%;">Thurs</th>
-                                                <th style="width: 14%;">Fri</th>
-                                                <th style="width: 14%;">Sat</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            
-                                        </tbody>
-                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            
+
+
 
         </div>
     </div>
@@ -203,6 +210,7 @@
                 </div>
                 <div class="modal-footer">
                     <button id="btnComplete" class="btn btn-primary col me-3" type="button">Complete Task</button>
+                    <button id="btnUncomplete" class="btn btn-primary col me-3" style="display: none;" type="button">Uncomplete Task</button>
                     <button id="btnCancelT" class="btn btn-danger col" type="button" data-bs-dismiss="modal">Cancel</button>
                 </div>
             </div>
@@ -267,35 +275,43 @@
 
         function addTasksToCal(){
             //add a row of color success with title of task
-            console.log(objCurrCalDate.getMonth())
             $.getJSON(`http://localhost:8000/schedule?year=${objCurrCalDate.getFullYear()}&month=${objCurrCalDate.getMonth() + 1}`, function(result) {
-                console.log(result.outcome)
                 if(result.outcome.length > 0) {
                     result.outcome.forEach(task => {
-                        $.getJSON(`http://localhost:8000/group?groupID=${task.GroupID}`, function(result) {
-                            let objTaskDate = new Date(task.DueDate)
-                            $(`#td${objTaskDate.getDate()} div`).append(`<button data-taskID="${task.TaskID}" style="background-color: ${result.outcome[0].GroupColor}" class="btn ps-2 mb-1 w-100 text-start rounded-0 task" type="button">${task.TaskName}</button>`)
+                        if(task.Status == 0) {
+                            $.getJSON(`http://localhost:8000/group?groupID=${task.GroupID}`, function(result) {
+                                let objTaskDate = new Date(task.DueDate)
+                                $(`#td${objTaskDate.getDate()} div`).append(`<button data-taskID="${task.TaskID}" style="background-color: ${result.outcome[0].GroupColor}" class="btn ps-2 mb-1 w-100 text-start rounded-0 task" type="button">${task.TaskName}</button>`)
                             
-                        })
+                            })
+                        }
+                        
                     })
                 }
             })
-
-
-            
-
         }
 
+        // apply task data to modal
         function taskInfoModal(strID) {
             $.getJSON(`http://localhost:8000/task?taskID=${strID}`, function(result) {
-                console.log(result.outcome);
                 $('#spanTaskName').text(result.outcome[0].TaskName);
                 $('#spanTaskDate').text(result.outcome[0].DueDate);
                 $('#spanTaskInstructions').text(result.outcome[0].Instructions);
                 $('#spanTaskLocation').text(result.outcome[0].Location);
+                $('#btnComplete').attr('data-taskID', `${strID}`);
+                $('#btnUncomplete').attr('data-taskID', `${strID}`);
+                let intStatus = result.outcome[0].Status;
 
                 $.getJSON(`http://localhost:8000/group?groupID=${result.outcome[0].GroupID}`, function(result) {
                     $('#spanTaskGroup').text(result.outcome[0].GroupName);
+                    if(intStatus == 1) {
+                        $('#btnUncomplete').show();
+                        $('#btnComplete').hide();
+                    } else {
+                        $('#btnUncomplete').hide();
+                        $('#btnComplete').show();
+                    }
+                    
                     $('#divTaskInfo').modal('show');
                 })
             })
@@ -339,15 +355,24 @@
                                             </div>
                                             <div class="card-body bg-body-tertiary pt-0">
 
-                                                <div id="divNoTask${group.GroupID}" class="row">
-                                                    <p class="text-center pt-4">No tasks at the moment</p>
+                                                <div class="incomplete">
+                                                
+                                                    <div id="divNoTask${group.GroupID}" class="row">
+                                                        <p class="text-center pt-4">No tasks at the moment</p>
+                                                    </div>
+
                                                 </div>
+
+                                                <div class="complete border-top mt-2" style="display: none;">
+                                                    <h4 class="pt-2">Completed Tasks</h4>
+                                                </div>
+                                                
 
                                             </div>
                                         </div>
                                     </div>`;
 
-                        $('#divMain').append(strHtml);
+                        $('#divTaskWindows').append(strHtml);
 
                         // Check to see if color is light or dark then change text color accordingingly
                         if(intColorBrightness >= 384) {
@@ -360,9 +385,8 @@
                 }
             });
 
-
+            // Add
             $.getJSON('http://localhost:8000/', function(result) {
-                console.log(result.outcome);
 
                 let strHtml = ``;
                 if(result.outcome.length > 0) {
@@ -374,17 +398,14 @@
                             </button>
                         </div>`;
 
-                        $(`#divNoTask`).remove();
-                        $('#divT .card-body').append(strHtml)
-
-                        if(task.GroupID) {
-                            $(`#divNoTask${task.GroupID}`).remove();
-                            $(`#divGroup${task.GroupID} .card-body`).append(strHtml);
+                        $(`#divNoTask${task.GroupID}`).remove();
+                        if(task.Status == 0) {
+                            $(`#divGroup${task.GroupID} .card-body .incomplete`).append(strHtml);
+                        } else if(task.Status == 1) {
+                            $(`#divGroup${task.GroupID} .card-body .complete`).show();
+                            $(`#divGroup${task.GroupID} .card-body .complete`).append(strHtml);
+                            $(`#btnTask${task.TaskID}`).addClass('text-decoration-line-through');
                         }
-
-
-
-                        
                     })
                 }
             })
@@ -408,6 +429,27 @@
             // Ensure the autocomplete dropdown appears above the modal
             $('.pac-container').css('z-index', '9999');
         }); 
+
+        //Buttons on Info Modal
+        $('#btnComplete').on('click', function() {
+            $.ajax({
+                url: `http://localhost:8000/status?taskID=${$(this).attr('data-taskID')}&status=1`,
+                type: 'PUT',
+                success: function() {
+                    
+                }
+            })
+        })
+
+        $('#btnUncomplete').on('click', function() {
+            $.ajax({
+                url: `http://localhost:8000/status?taskID=${$(this).attr('data-taskID')}&status=0`,
+                type: 'PUT',
+                success: function() {
+                    
+                }
+            })
+        })
 
 
         //Buttons on calendar
@@ -544,10 +586,6 @@
                 
             })
 
-
-            
-
-
             // Stop mouseover handler from making things execute a million different times
             $('#ulNav').unbind('mouseover');
         })
@@ -556,19 +594,15 @@
             $('#divAddGroup').modal('show');
         });
         
-
-        
-
-
-
-        $('#divMain').mouseover(function() {
+        // for dynamic buttons on tasks
+        $('#divTaskWindows').mouseover(function() {
             $('.divTask, .task').on('click', function() {
                 let strID = $(this).attr('data-taskID');
                 taskInfoModal(strID);
-                
             })
 
 
+            //delete certain task
             $('.divTask, .task').on('contextmenu', function(rightClick) {
                 rightClick.preventDefault();
 
@@ -600,10 +634,6 @@
             $('#divMain').unbind('mouseover');
         })
 
-
-
-       
-        
 
     </script>
 </body>

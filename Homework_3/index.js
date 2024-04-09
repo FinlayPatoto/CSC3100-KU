@@ -176,6 +176,27 @@ app.delete('/task', (req, res, next) => {
 
 
 
+//update status
+app.put('/status', (req, res, next) => {
+    let arrParams = [req.query.status, req.query.taskID];
+    console.log(arrParams)
+
+    let strCommand = "UPDATE tblTasks SET Status = ? WHERE TaskID = ?";
+    if(arrParams[0] && arrParams[1]) {
+        db.run(strCommand, arrParams, (err) => {
+            if(err) {
+                res.status(400).json({error: err.message});
+                console.log(err.message);
+            } else {
+                res.status(200).json({message: 'Success', outcome: `${this.changes} row(s) affected`});
+            }
+        })
+    } else {
+        res.status(400).json({error: 'Must provide a taskid'});
+    }
+})
+
+
 
 
 
